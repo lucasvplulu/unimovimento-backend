@@ -1,5 +1,7 @@
 package com.unimovimento.app.pessoa;
 
+import com.sun.istack.NotNull;
+import com.unimovimento.app.pessoaendereco.PessoaEndereco;
 import com.unimovimento.app.util.enumeration.TipoEstadoCivil;
 import com.unimovimento.app.util.enumeration.TipoGrauInstrucao;
 import com.unimovimento.app.util.enumeration.TipoSexo;
@@ -10,10 +12,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -31,9 +32,13 @@ public class Pessoa {
     @Type(type = "uuid-char")
     private UUID id;
 
+    @NotNull
+    @Size(min = 11, message = "CPF invalido.")
     @Column(unique = true, length = 11, nullable = false)
     private String cpf;
 
+    @NotNull
+    @Size(min = 2, message = "O nome deve conter no minimo 2 caracteres.")
     @Column(nullable = false)
     private String nome;
 
@@ -42,6 +47,8 @@ public class Pessoa {
     private TipoSexo sexo;
     private TipoEstadoCivil estadoCivil;
 
+
+    @Email(regexp = ".+[@].+[\\.].+")
     private String email;
 
     private String celular;
@@ -54,6 +61,9 @@ public class Pessoa {
     private String remedioAlergia;
     private TipoGrauInstrucao escolaridade;
     private String profissao;
+
+    @Transient
+    private PessoaEndereco pessoaEndereco;
 
     public Pessoa(String cpf, String nome, LocalDate data_nasc, TipoSexo sexo, TipoEstadoCivil estadoCivil, String email, String celular, String rg, String rgEmissor, String foto, Boolean tomaRemedio, String remedio, Boolean alergia, String remedioAlergia, TipoGrauInstrucao escolaridade, String profissao) {
         this.cpf = cpf;

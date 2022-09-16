@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +26,7 @@ public class PessoaEndereco {
     @Type(type = "uuid-char")
     private UUID id;
 
+    @Size(min = 8, message = "CEP invalido.")
     @Column(length = 8)
     private String cep;
 

@@ -1,11 +1,11 @@
 package com.unimovimento.app.pessoa;
 
 import com.unimovimento.app.pessoaendereco.PessoaEnderecoRepository;
-import com.unimovimento.app.pessoaendereco.PessoaEnderecoService;
+import com.unimovimento.app.util.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class PessoaService {
+public class PessoaService implements GenericService <Pessoa> {
 
     @Autowired
     private PessoaRepository pessoaRepository;
@@ -21,81 +21,51 @@ public class PessoaService {
     @Autowired
     private PessoaEnderecoRepository pessoaEnderecoRepository;
 
-    @Autowired
-    private PessoaEnderecoService pessoaEnderecoService;
-
-
-    public List<Pessoa> listaPessoas() {
+    @Override
+    public List<Pessoa> findAll() {
         return pessoaRepository.findAll();
     }
 
     @Transactional
-    public ResponseEntity<Object> save(PessoaDTO pessoaDTO) throws Exception {
+    @Override
+    public Pessoa create(Pessoa pessoa) {
+
+            var cpf = pessoa.getCpf().replace(".", "").replace("-", "");
+            if (pessoaRepository.existsByCpf(cpf)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Já existe uma pessoa cadastrada com este CPF.");
+            }
+
         try {
-
-            Pessoa pessoa = new Pessoa(
-                    pessoaDTO.getCpf().replace(".", "").replace("-", ""),
-                    pessoaDTO.getNome(),
-                    pessoaDTO.getData_nasc(),
-                    pessoaDTO.getSexo(),
-                    pessoaDTO.getEstadoCivil(),
-                    pessoaDTO.getEmail(),
-                    pessoaDTO.getCelular(),
-                    pessoaDTO.getRg(),
-                    pessoaDTO.getRgEmissor(),
-                    pessoaDTO.getFoto(),
-                    pessoaDTO.getTomaRemedio(),
-                    pessoaDTO.getRemedio(),
-                    pessoaDTO.getAlergia(),
-                    pessoaDTO.getRemedioAlergia(),
-                    pessoaDTO.getEscolaridade(),
-                    pessoaDTO.getProfissao()
-            );
-
             pessoa = pessoaRepository.saveAndFlush(pessoa);
+            pessoaEnderecoRepository.save(pessoa.getPessoaEndereco());
 
-            var endereco = pessoaEnderecoService.convertDto(pessoa, pessoaDTO.getPessoaEndereco());
-            pessoaEnderecoRepository.save(endereco);
-
-            return ResponseEntity.accepted().body(pessoa);
+            return pessoa;
         } catch (Exception e) {
             throw new RuntimeException();
         }
 
     }
 
-    public ResponseEntity<Object> update(PessoaDTO pessoaDTO, UUID id) {
+    @Transactional
+    @Override
+    public Pessoa update(UUID id, Pessoa pessoa) {
 
         Optional<Pessoa> pessoaData = pessoaRepository.findById(id);
 
         if (pessoaData.isPresent()) {
-            Pessoa pessoa = pessoaData.get();
-            pessoa.setAlergia(pessoaDTO.getAlergia());
-            pessoa.setCelular(pessoaDTO.getCelular());
-            pessoa.setCpf(pessoaDTO.getCpf()
-                    .replace(".", "")
-                    .replace("-", "")
-            );
-            pessoa.setData_nasc(pessoaDTO.getData_nasc());
-            pessoa.setEmail(pessoaDTO.getEmail());
-            pessoa.setEscolaridade(pessoaDTO.getEscolaridade());
-            pessoa.setEstadoCivil(pessoaDTO.getEstadoCivil());
-            pessoa.setFoto(pessoaDTO.getFoto());
-            pessoa.setNome(pessoaDTO.getNome());
-            pessoa.setProfissao(pessoaDTO.getProfissao());
-            pessoa.setRemedio(pessoaDTO.getRemedio());
-            pessoa.setRemedioAlergia(pessoaDTO.getRemedioAlergia());
-            pessoa.setRg(pessoaDTO.getRg());
-            pessoa.setRgEmissor(pessoaDTO.getRgEmissor());
-            pessoa.setSexo(pessoaDTO.getSexo());
-            pessoa.setTomaRemedio(pessoaDTO.getTomaRemedio());
-
-            pessoa = pessoaRepository.save(pessoa);
-            return ResponseEntity.accepted().body(pessoa);
+            return pessoaRepository.save(pessoa);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pessoa não encontrada.");
         }
     }
 
+    @Override
+    public Pessoa findById(UUID id) {
+        return null;
+    }
 
+    @Override
+    public Boolean delete(UUID id) {
+        return null;
+    }
 }
