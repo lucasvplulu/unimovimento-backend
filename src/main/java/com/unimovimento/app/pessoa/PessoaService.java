@@ -1,6 +1,6 @@
 package com.unimovimento.app.pessoa;
 
-import com.unimovimento.app.pessoaendereco.PessoaEnderecoRepository;
+import com.unimovimento.app.pessoa.endereco.PessoaEnderecoRepository;
 import com.unimovimento.app.util.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,14 +30,14 @@ public class PessoaService implements GenericService <Pessoa> {
     @Override
     public Pessoa create(Pessoa pessoa) {
 
-            var cpf = pessoa.getCpf().replace(".", "").replace("-", "");
-            if (pessoaRepository.existsByCpf(cpf)) {
+            var cpf = pessoa.getDocumento().getCpf().replace(".", "").replace("-", "");
+            if (pessoaRepository.existsByDocumentoCpf(cpf)) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Já existe uma pessoa cadastrada com este CPF.");
             }
 
         try {
             pessoa = pessoaRepository.saveAndFlush(pessoa);
-            pessoaEnderecoRepository.save(pessoa.getPessoaEndereco());
+            pessoaEnderecoRepository.save(pessoa.getEndereco());
 
             return pessoa;
         } catch (Exception e) {
