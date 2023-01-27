@@ -7,9 +7,9 @@
 1.0.0
 
 ### Links Úteis
-Repositório backend: https://github.com/unimovsistemas/unimovimento-backend
-Repositório frontend: https://github.com/unimovsistemas/unimovimento-frontend
-Discovery: https://miro.com/app/board/uXjVOhGfNZ0=/
+- Repositório backend: https://github.com/unimovsistemas/unimovimento-backend
+- Repositório frontend: https://github.com/unimovsistemas/unimovimento-frontend
+- Discovery: https://miro.com/app/board/uXjVOhGfNZ0=/
 
 ### Requisitos para Desenvolvimento e Execução
 - Java 11 (LTS) - https://www.azul.com/downloads/?version=java-11-lts&package=jdk
