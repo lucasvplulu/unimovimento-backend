@@ -1,21 +1,11 @@
 CREATE TABLE pessoa (
   id char(36) NOT NULL,
-  alergia BOOLEAN DEFAULT NULL,
-  celular varchar(255) DEFAULT NULL,
-  cpf varchar(11) NOT NULL,
-  data_nasc date DEFAULT NULL,
-  email varchar(255) DEFAULT NULL,
-  escolaridade int DEFAULT NULL,
-  estado_civil int DEFAULT NULL,
-  foto varchar(255) DEFAULT NULL,
   nome varchar(255) NOT NULL,
+  data_nascimento date DEFAULT NULL,
+  sexo varchar(255) NOT NULL,
+  estado_civil varchar(255) DEFAULT NULL,
+  nome_conjuge varchar(255) DEFAULT NULL,
+  escolaridade varchar(255) DEFAULT NULL,
   profissao varchar(255) DEFAULT NULL,
-  remedio varchar(255) DEFAULT NULL,
-  remedio_alergia varchar(255) DEFAULT NULL,
-  rg varchar(255) DEFAULT NULL,
-  rg_emissor varchar(255) DEFAULT NULL,
-  sexo int DEFAULT NULL,
-  toma_remedio BOOLEAN DEFAULT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT UK_nlwiu48rutiltbnjle59krljo UNIQUE (cpf)
-)
+  foto varchar(255) DEFAULT NULL,
+  PRIMARY KEY (id));

@@ -8,6 +8,6 @@ import java.util.UUID;
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, UUID> {
 
-    Boolean existsByCpf(String cpf);
+    Boolean existsByDocumentoCpf(String cpf);
 
 }

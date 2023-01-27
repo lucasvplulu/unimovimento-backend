@@ -1,0 +1,80 @@
+package com.unimovimento.app.util.enumeration;
+
+public enum LivroBiblia {
+    GENESIS("Gênesis"),
+    EXODO("Êxodo"),
+    LEVITICO("Levítico"),
+    NUMEROS("Números"),
+    DEUTERONOMIO("Deuteronômio"),
+    JOSUE("Josué"),
+    JUIZES("Juízes"),
+    RUTE("Rute"),
+    PRIMEIRO_SAMUEL("1º Samuel"),
+    SEGUNDO_SAMUEL("2º Samuel"),
+    PRIMEIRO_REIS("1º Reis"),
+    SEGUNDO_REIS("2º Reis"),
+    PRIMEIRO_CRONICAS("1º Crônicas"),
+    SEGUNDO_CRONICAS("2º Crônicas"),
+    ESDRAS("Esdras"),
+    NEEMIAS("Neemias"),
+    ESTER("Ester"),
+    JO("Jó"),
+    SALMOS("Salmos"),
+    PROVERBIOS("Provérbios"),
+    ECLESIASTES("Eclesiastes"),
+    CANTARES_SALOMAO("Cantares de Salomão"),
+    ISAIAS("Isaías"),
+    JEREMIAS("Jeremias"),
+    LAMENTACOES("Lamentações"),
+    EZEQUIEL("Ezequiel"),
+    DANIEL("Daniel"),
+    OSEIAS("Oséias"),
+    JOEL("Joel"),
+    AMÓS("Amós"),
+    OBADIAS("Obadias"),
+    JONAS("Jonas"),
+    MIQUEIAS("Miquéias"),
+    NAUM("Naum"),
+    HABACUQUE("Habucuque"),
+    SOFONIAS("Sofonias"),
+    AGEU("Ageu"),
+    ZACARIAS("Zacarias"),
+    MALAQUIAS("Malaquias"),
+    MATEUS("Mateus"),
+    MARCOS("Marcos"),
+    LUCAS("Lucas"),
+    JOAO("João"),
+    ATOS("Atos"),
+    ROMANOS("Romanos"),
+    PRIMEIRO_CORINTIOS("1º Coríntios"),
+    SEGUNDO_CORINTIOS("2º Coríntios"),
+    GALATAS("Gálatas"),
+    EFESIOS("Efésios"),
+    FILIPENSES("Filipenses"),
+    COLOSSENSES("Colossenses"),
+    PRIMEIRO_TESSALONICENSES("1º Tessalonicenses"),
+    SEGUNDO_TESSALONICENSES("2º Tessalonicenses"),
+    PRIMEIRO_TIMOTEO("1º Timóteo"),
+    SEGUNDO_TIMOTEO("2º Timóteo"),
+    TITO("Tito"),
+    FILEMOM("Filemom"),
+    HEBREUS("Hebreus"),
+    TIAGO("Tiago"),
+    PRIMEIRO_PEDRO("1º Pedro"),
+    SEGUNDO_PEDRO("2º Pedro"),
+    PRIMEIRO_JOAO("1º João"),
+    SEGUNDO_JOAO("2º João"),
+    TERCEIRO_JOAO("3º João"),
+    JUDAS("Judas"),
+    APOCALIPSE("Apocalipse");
+
+    private final String descricao;
+
+    LivroBiblia(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+}
