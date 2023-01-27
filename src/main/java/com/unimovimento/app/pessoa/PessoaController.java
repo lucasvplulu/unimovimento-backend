@@ -15,7 +15,7 @@ import java.util.UUID;
 public class PessoaController extends GenericController<Pessoa> {
 
     @Autowired
-    public PessoaController(@Qualifier("pessoaController") PessoaService pessoaService){
+    public PessoaController(@Qualifier("pessoaService") PessoaService pessoaService){
         super(pessoaService);
     }
 

@@ -1,4 +1,4 @@
-package com.unimovimento.app.formulario;
+package com.unimovimento.app.evento;
 
 import com.unimovimento.app.util.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/formulario")
-public class FormularioController extends GenericController<Formulario> {
+@RequestMapping("/api/evento")
+public class EventoController extends GenericController<Evento> {
 
     @Autowired
-    public FormularioController(@Qualifier("formularioController") FormularioService formularioService) {
-        super(formularioService);
+    public EventoController(@Qualifier("eventoService") EventoService eventoService) {
+        super(eventoService);
     }
 
 }
