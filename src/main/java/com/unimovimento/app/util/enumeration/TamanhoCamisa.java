@@ -1,6 +1,7 @@
 package com.unimovimento.app.util.enumeration;
 
 public enum TamanhoCamisa {
+    CATORZE("14"),
     PP("PP"),
     P("P"),
     M("M"),
@@ -8,7 +9,8 @@ public enum TamanhoCamisa {
     GG("GG"),
     XG("XG"),
     XXG("XXG"),
-    NENHUM("Nenhum");
+    OUTRO("Outro"),
+    NAO_INFORMADO("Não Informado");
 
     private final String descricao;
 
