@@ -6,7 +6,7 @@ public enum TipoVozCoral {
     BAIXO("Baixo"),
     CONTRALTO("Contralto"),
     SOPRANO("Soprano"),
-    DESCONHECIDO("Desconhecido");
+    NAO_INFORMADO("Não Informado");
 
     private final String descricao;
 
